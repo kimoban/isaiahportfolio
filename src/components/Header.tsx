@@ -18,47 +18,74 @@ const Header = () => {
   const [activeHref, setActiveHref] = useState<string | null>(null);
   const [isTabTrackingEnabled, setIsTabTrackingEnabled] = useState(false);
 
+  const resolveActiveHref = () => {
+    const sections = navItems
+      .map((item) => document.querySelector<HTMLElement>(item.href))
+      .filter((section): section is HTMLElement => Boolean(section));
+
+    if (!sections.length) {
+      return null;
+    }
+
+    const probeOffset = 140;
+    let currentHref = `#${sections[0].id}`;
+
+    for (const section of sections) {
+      if (section.getBoundingClientRect().top <= probeOffset) {
+        currentHref = `#${section.id}`;
+      } else {
+        break;
+      }
+    }
+
+    return currentHref;
+  };
+
+  const handleNavClick = (href: string, shouldCloseMenu = false) => {
+    setIsTabTrackingEnabled(true);
+    setActiveHref(href);
+
+    if (shouldCloseMenu) {
+      setOpen(false);
+    }
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const resolvedHref = resolveActiveHref();
+        if (resolvedHref) {
+          setActiveHref(resolvedHref);
+        }
+      });
+    });
+  };
+
   useEffect(() => {
     if (!isTabTrackingEnabled) {
       return;
     }
 
-    const sections = navItems
-      .map((item) => document.querySelector<HTMLElement>(item.href))
-      .filter((section): section is HTMLElement => Boolean(section));
+    let frameId = 0;
 
     const updateActiveSection = () => {
-      const marker = window.scrollY + 140;
-      let currentHref = navItems[0]?.href ?? "#about";
-
-      for (const section of sections) {
-        if (section.offsetTop <= marker) {
-          currentHref = `#${section.id}`;
+      cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(() => {
+        const currentHref = resolveActiveHref();
+        if (currentHref) {
+          setActiveHref(currentHref);
         }
-      }
-
-      setActiveHref(currentHref);
+      });
     };
-
-    const syncHash = () => {
-      if (window.location.hash) {
-        setActiveHref(window.location.hash);
-      } else {
-        updateActiveSection();
-      }
-    };
-
-    syncHash();
 
     updateActiveSection();
     window.addEventListener("scroll", updateActiveSection, { passive: true });
     window.addEventListener("resize", updateActiveSection);
-    window.addEventListener("hashchange", syncHash);
+    window.addEventListener("hashchange", updateActiveSection);
 
     return () => {
+      cancelAnimationFrame(frameId);
       window.removeEventListener("scroll", updateActiveSection);
       window.removeEventListener("resize", updateActiveSection);
-      window.removeEventListener("hashchange", syncHash);
+      window.removeEventListener("hashchange", updateActiveSection);
     };
   }, [isTabTrackingEnabled]);
 
@@ -82,10 +109,7 @@ const Header = () => {
             <li key={item.href}>
               <a
                 href={item.href}
-                onClick={() => {
-                  setIsTabTrackingEnabled(true);
-                  setActiveHref(item.href);
-                }}
+                onClick={() => handleNavClick(item.href)}
                 aria-current={activeHref === item.href ? "page" : undefined}
                 className={`inline-flex rounded-full px-4 py-2 text-sm font-medium transition-all ${
                   activeHref === item.href
@@ -125,11 +149,7 @@ const Header = () => {
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    onClick={() => {
-                      setIsTabTrackingEnabled(true);
-                      setActiveHref(item.href);
-                      setOpen(false);
-                    }}
+                    onClick={() => handleNavClick(item.href, true)}
                     aria-current={activeHref === item.href ? "page" : undefined}
                     className={`block rounded-xl px-4 py-3 font-medium transition-colors ${
                       activeHref === item.href
