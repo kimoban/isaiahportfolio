@@ -15,9 +15,14 @@ const navItems = [
 
 const Header = () => {
   const [open, setOpen] = useState(false);
-  const [activeHref, setActiveHref] = useState("#about");
+  const [activeHref, setActiveHref] = useState<string | null>(null);
+  const [isTabTrackingEnabled, setIsTabTrackingEnabled] = useState(false);
 
   useEffect(() => {
+    if (!isTabTrackingEnabled) {
+      return;
+    }
+
     const sections = navItems
       .map((item) => document.querySelector<HTMLElement>(item.href))
       .filter((section): section is HTMLElement => Boolean(section));
@@ -55,7 +60,7 @@ const Header = () => {
       window.removeEventListener("resize", updateActiveSection);
       window.removeEventListener("hashchange", syncHash);
     };
-  }, []);
+  }, [isTabTrackingEnabled]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
@@ -77,7 +82,10 @@ const Header = () => {
             <li key={item.href}>
               <a
                 href={item.href}
-                onClick={() => setActiveHref(item.href)}
+                onClick={() => {
+                  setIsTabTrackingEnabled(true);
+                  setActiveHref(item.href);
+                }}
                 aria-current={activeHref === item.href ? "page" : undefined}
                 className={`inline-flex rounded-full px-4 py-2 text-sm font-medium transition-all ${
                   activeHref === item.href
@@ -118,6 +126,7 @@ const Header = () => {
                   <a
                     href={item.href}
                     onClick={() => {
+                      setIsTabTrackingEnabled(true);
                       setActiveHref(item.href);
                       setOpen(false);
                     }}
