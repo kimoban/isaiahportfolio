@@ -1,9 +1,10 @@
 import { FormEvent } from "react";
 import { motion } from "framer-motion";
-import { Send, Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { Send, Github, Linkedin, Mail } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import { socialLinks } from "@/data/portfolio";
 import { toast } from "sonner";
+import XIcon from "./XIcon";
 
 const Contact = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -27,7 +28,7 @@ const Contact = () => {
     { icon: Github, href: socialLinks.github, label: "GitHub" },
     { icon: Linkedin, href: socialLinks.linkedin, label: "LinkedIn" },
     { icon: Mail, href: `mailto:${socialLinks.email}`, label: "Email" },
-    { icon: Twitter, href: socialLinks.x, label: "X" },
+    { icon: XIcon, href: socialLinks.x, label: "X" },
   ];
 
   return (

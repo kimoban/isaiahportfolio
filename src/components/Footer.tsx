@@ -1,5 +1,6 @@
-import { Github, Linkedin, Mail, Twitter } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 import { socialLinks, ownerName } from "@/data/portfolio";
+import XIcon from "./XIcon";
 
 const MediumIcon = ({ size = 18 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -18,7 +19,7 @@ const Footer = () => (
           { icon: Github, href: socialLinks.github, label: "GitHub" },
           { icon: Linkedin, href: socialLinks.linkedin, label: "LinkedIn" },
           { icon: Mail, href: `mailto:${socialLinks.email}`, label: "Email" },
-          { icon: Twitter, href: socialLinks.x, label: "X" },
+          { icon: XIcon, href: socialLinks.x, label: "X" },
           { icon: MediumIcon, href: socialLinks.medium, label: "Medium" },
         ].map(({ icon: Icon, href, label }) => (
           <a
