@@ -1,10 +1,9 @@
 import { FormEvent } from "react";
 import { motion } from "framer-motion";
-import { Send, Github, Linkedin, Mail } from "lucide-react";
+import { Send } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 import { socialLinks } from "@/data/portfolio";
 import { toast } from "sonner";
-import XIcon from "./XIcon";
 
 const Contact = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -24,13 +23,6 @@ const Contact = () => {
     form.reset();
   };
 
-  const contactLinks = [
-    { icon: Github, href: socialLinks.github, label: "GitHub" },
-    { icon: Linkedin, href: socialLinks.linkedin, label: "LinkedIn" },
-    { icon: Mail, href: `mailto:${socialLinks.email}`, label: "Email" },
-    { icon: XIcon, href: socialLinks.x, label: "X" },
-  ];
-
   return (
     <AnimatedSection className="py-24 px-6">
       <div id="contact" className="container mx-auto max-w-2xl scroll-mt-24">
@@ -43,23 +35,6 @@ const Contact = () => {
         <p className="text-sm text-muted-foreground/80 mb-10 font-body">
           This form opens your default email app with your message prefilled.
         </p>
-
-        <div className="flex gap-5 mb-10">
-          {contactLinks.map(({ icon: Icon, href, label }) => (
-            <motion.a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-3 rounded-lg bg-secondary text-secondary-foreground hover:bg-muted transition-colors"
-              aria-label={label}
-            >
-              <Icon size={22} />
-            </motion.a>
-          ))}
-        </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid sm:grid-cols-2 gap-5">
