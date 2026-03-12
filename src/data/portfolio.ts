@@ -151,6 +151,6 @@ export const socialLinks = {
   github: "https://github.com/kimoban",
   linkedin: "https://www.linkedin.com/in/kimoban/",
   email: "isaiahkimoban87@gmail.com",
-  x: "https://x.com/kimoban",
+  x: "https://x.com/kimobaan",
   medium: "https://medium.com/@kimoban",
 };
