@@ -9,12 +9,24 @@ const MediumIcon = ({ size = 18 }: { size?: number }) => (
 );
 
 const Footer = () => (
-  <footer className="py-8 px-6 border-t border-border">
-    <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p className="text-sm text-muted-foreground font-body">
-        © {new Date().getFullYear()} Isaiah N-yilyal. All rights reserved.
-      </p>
-      <div className="flex gap-4">
+  <footer className="px-6 pb-10 pt-4">
+    <div className="container mx-auto">
+      <div className="relative overflow-hidden rounded-[2rem] border border-border/70 bg-[linear-gradient(135deg,hsl(var(--card)),hsl(var(--secondary)/0.92))] px-6 py-8 shadow-[0_24px_80px_-32px_hsl(var(--primary)/0.35)] sm:px-8">
+        <div className="absolute -left-16 top-0 h-36 w-36 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute -right-10 bottom-0 h-40 w-40 rounded-full bg-accent/10 blur-3xl" />
+        <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary/80 mb-3">
+              Built for Bold Ideas
+            </p>
+            <p className="text-base sm:text-lg font-medium text-foreground font-body">
+              © {new Date().getFullYear()} Isaiah N-yilyal.
+            </p>
+            <p className="text-sm text-muted-foreground font-body mt-1">
+              All rights reserved.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
         {[
           { icon: Github, href: socialLinks.github, label: "GitHub" },
           { icon: Linkedin, href: socialLinks.linkedin, label: "LinkedIn" },
@@ -27,12 +39,14 @@ const Footer = () => (
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-border/80 bg-background/65 text-foreground shadow-[0_12px_30px_-18px_hsl(var(--foreground)/0.2)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-[linear-gradient(135deg,hsl(var(--primary)/0.14),hsl(var(--hero-gradient-end)/0.14),hsl(var(--accent)/0.12))] hover:text-primary"
             aria-label={label}
           >
             <Icon size={18} />
           </a>
         ))}
+          </div>
+        </div>
       </div>
     </div>
   </footer>
