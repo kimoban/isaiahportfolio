@@ -1,5 +1,5 @@
 import { Github, Linkedin, Mail } from "lucide-react";
-import { socialLinks, ownerName } from "@/data/portfolio";
+import { socialLinks } from "@/data/portfolio";
 import XIcon from "./XIcon";
 
 const MediumIcon = ({ size = 18 }: { size?: number }) => (
@@ -12,7 +12,7 @@ const Footer = () => (
   <footer className="py-8 px-6 border-t border-border">
     <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
       <p className="text-sm text-muted-foreground font-body">
-        © {new Date().getFullYear()} {ownerName}. All rights reserved.
+        © {new Date().getFullYear()} Isaiah N-yilyal. All rights reserved.
       </p>
       <div className="flex gap-4">
         {[

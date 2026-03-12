@@ -30,7 +30,7 @@ const Contact = () => {
           Get In <span className="text-gradient">Touch</span>
         </h2>
         <p className="text-muted-foreground mb-2 font-body">
-          Have a project in mind or want to collaborate? Let's talk.
+          Have a startup idea, a business model or a corporate entity you want turned into a mobile app, a website or enhanced security for you? Have a project in mind or want to collaborate? Let's talk.
         </p>
         <p className="text-sm text-muted-foreground/80 mb-10 font-body">
           This form opens your default email app with your message prefilled.
@@ -67,7 +67,7 @@ const Contact = () => {
             className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium transition-opacity hover:opacity-90"
           >
             <Send size={18} />
-            Compose Email
+            Send Your Email
           </motion.button>
         </form>
       </div>
