@@ -10,7 +10,7 @@ const containerVariants = {
 
 const Projects = () => (
   <AnimatedSection className="py-24 px-6" animation="scale">
-    <div id="projects" className="container mx-auto max-w-4xl scroll-mt-24">
+    <div id="projects" className="container mx-auto max-w-5xl scroll-mt-24">
       <motion.h2
         initial={{ opacity: 0, x: -30 }}
         whileInView={{ opacity: 1, x: 0 }}

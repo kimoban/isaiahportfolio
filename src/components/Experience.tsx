@@ -14,7 +14,7 @@ const itemVariants = {
 
 const Experience = () => (
   <AnimatedSection className="py-24 px-6 bg-secondary/30" animation="fade-left">
-    <div id="experience" className="container mx-auto max-w-3xl scroll-mt-24">
+    <div id="experience" className="container mx-auto max-w-5xl scroll-mt-24">
       <motion.h2
         initial={{ opacity: 0, x: -30 }}
         whileInView={{ opacity: 1, x: 0 }}
