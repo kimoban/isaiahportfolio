@@ -42,6 +42,16 @@ export interface Service {
   description: string;
 }
 
+export interface Article {
+  id: string;
+  title: string;
+  summary: string;
+  tags: string[];
+  readTime: string;
+  published: string;
+  href: string;
+}
+
 export const services: Service[] = [
   {
     title: "Mobile & Web Applications",
@@ -102,6 +112,29 @@ export const projects: Project[] = [
     demo: "https://lumiere-landing.vercel.app/",
     featured: true,
     image: "/images/lumiere-restaurant.jpg",
+  },
+];
+
+export const articles: Article[] = [
+  {
+    id: "api-security-playbook",
+    title: "API Security Playbook for Early-Stage Products",
+    summary:
+      "A practical breakdown of how to harden authentication flows, protect sensitive routes, and reduce common OWASP API risks without slowing down product delivery.",
+    tags: ["API Security", "OWASP", "Backend"],
+    readTime: "6 min read",
+    published: "March 2026",
+    href: "https://medium.com/@kimoban",
+  },
+  {
+    id: "fullstack-observability",
+    title: "Building Full-Stack Observability Into Modern Web Apps",
+    summary:
+      "How to instrument frontend and backend systems so performance issues, failed requests, and suspicious behavior are visible before they become user-facing incidents.",
+    tags: ["Observability", "React", "Cybersecurity"],
+    readTime: "5 min read",
+    published: "March 2026",
+    href: "https://medium.com/@kimoban",
   },
 ];
 
