@@ -3,7 +3,7 @@ import { ArrowDown, Mail, FolderOpen } from "lucide-react";
 import { ownerName } from "@/data/portfolio";
 import { useEffect, useState } from "react";
 
-const roles = ["Full-Stack Developer", "API Architect", "Frontend Engineer", "Problem Solver"];
+const roles = ["Full-Stack Developer", "API Architect", "Frontend Engineer", "Problem Solver", "Cyber Expert"];
 
 const Hero = () => {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -72,6 +72,7 @@ const Hero = () => {
           className="max-w-xl mx-auto text-muted-foreground mb-10 font-body leading-relaxed"
         >
           Crafting clean, responsive interfaces and scalable backend systems.
+          Bringing a cybersecurity-first mindset to building resilient digital experiences.
           Seeking junior roles and freelance opportunities.
         </motion.p>
 
