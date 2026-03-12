@@ -22,35 +22,37 @@ const Header = () => {
       .map((item) => document.querySelector<HTMLElement>(item.href))
       .filter((section): section is HTMLElement => Boolean(section));
 
+    const updateActiveSection = () => {
+      const marker = window.scrollY + 140;
+      let currentHref = navItems[0]?.href ?? "#about";
+
+      for (const section of sections) {
+        if (section.offsetTop <= marker) {
+          currentHref = `#${section.id}`;
+        }
+      }
+
+      setActiveHref(currentHref);
+    };
+
     const syncHash = () => {
       if (window.location.hash) {
         setActiveHref(window.location.hash);
+      } else {
+        updateActiveSection();
       }
     };
 
     syncHash();
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntry = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-        if (visibleEntry) {
-          setActiveHref(`#${visibleEntry.target.id}`);
-        }
-      },
-      {
-        rootMargin: "-35% 0px -45% 0px",
-        threshold: [0.2, 0.4, 0.6],
-      },
-    );
-
-    sections.forEach((section) => observer.observe(section));
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
     window.addEventListener("hashchange", syncHash);
 
     return () => {
-      observer.disconnect();
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
       window.removeEventListener("hashchange", syncHash);
     };
   }, []);
