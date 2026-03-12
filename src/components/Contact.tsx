@@ -67,7 +67,7 @@ const Contact = () => {
             className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium transition-opacity hover:opacity-90"
           >
             <Send size={18} />
-            Send Your Email
+            Compose Your Email
           </motion.button>
         </form>
       </div>
