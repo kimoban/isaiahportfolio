@@ -9,8 +9,8 @@ const navItems = [
   { label: "Services", href: "#services" },
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
-  { label: "Contact", href: "#contact" },
   { label: "Blog", href: "#blog" },
+  { label: "Contact", href: "#contact" },
 ];
 
 const Header = () => {
