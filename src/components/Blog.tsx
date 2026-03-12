@@ -18,7 +18,6 @@ const Blog = () => (
         transition={{ duration: 0.6 }}
         className="mb-12"
       >
-        <p className="text-sm uppercase tracking-[0.25em] text-primary font-medium mb-4">Blog</p>
         <h2 className="text-3xl md:text-4xl font-bold font-display mb-4 text-foreground">
           Tech Article <span className="text-gradient">Series</span>
         </h2>
