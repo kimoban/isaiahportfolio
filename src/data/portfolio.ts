@@ -155,4 +155,5 @@ export const socialLinks = {
   medium: "https://medium.com/@kimoban",
   facebook: "https://facebook.com",
   youtube: "https://youtube.com",
+  calendly: "https://calendly.com/your-calendly-username",
 };

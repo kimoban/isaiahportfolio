@@ -139,6 +139,19 @@ const Contact = () => {
             <Send size={18} />
             {isSubmitting ? "Sending..." : "Send Message"}
           </motion.button>
+          <div className="flex flex-col items-start gap-3 pt-1">
+            <p className="text-sm font-medium text-muted-foreground font-body pl-1">Or</p>
+            <motion.a
+              href={socialLinks.calendly}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center justify-center rounded-lg border border-border bg-secondary px-6 py-3 text-secondary-foreground font-medium transition-colors hover:bg-muted"
+            >
+              Book a Consultation
+            </motion.a>
+          </div>
           <p
             className={[
               "min-h-6 text-sm font-body transition-colors",
