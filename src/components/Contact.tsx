@@ -32,7 +32,7 @@ const Contact = () => {
         <p className="text-muted-foreground mb-2 font-body">
           Have a startup idea, a business model or a corporate entity you want turned into a mobile app, a website or enhanced security for you? Have a project in mind or want to collaborate? Let's talk.
         </p>
-        <p className="text-sm text-primary/80 italic mb-10 font-body">
+        <p className="font-bell text-sm text-primary/80 mb-10">
           This form opens your default email app with your message prefilled.
         </p>
 

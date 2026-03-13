@@ -123,6 +123,9 @@
 }
 
 @layer utilities {
+  .font-bell {
+    font-family: "Bell MT", Georgia, serif;
+  }
   .text-gradient {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(
