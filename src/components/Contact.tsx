@@ -5,11 +5,18 @@ import AnimatedSection from "./AnimatedSection";
 import { socialLinks } from "@/data/portfolio";
 import { toast } from "sonner";
 
+type SubmitState = {
+  tone: "success" | "error" | "info";
+  message: string;
+} | null;
+
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitState, setSubmitState] = useState<SubmitState>(null);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setSubmitState(null);
 
     const form = event.currentTarget;
     const formData = new FormData(form);
@@ -22,11 +29,19 @@ const Contact = () => {
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
 
     if (!name || !email || !message) {
+      setSubmitState({
+        tone: "error",
+        message: "Please complete your name, email, and message before sending.",
+      });
       toast.error("Please complete all fields before sending.");
       return;
     }
 
     if (!formspreeEndpoint) {
+      setSubmitState({
+        tone: "info",
+        message: "Direct delivery is not configured yet, so your email app is opening instead.",
+      });
       window.location.href = `mailto:${socialLinks.email}?subject=${subject}&body=${body}`;
       toast.success("Opening your email app.");
       return;
@@ -50,9 +65,17 @@ const Contact = () => {
         throw new Error("Form submission failed.");
       }
 
+      setSubmitState({
+        tone: "success",
+        message: "Message sent successfully. Thank you, your note is now in my inbox.",
+      });
       toast.success("Message sent successfully. I will receive it in my inbox.");
       form.reset();
     } catch {
+      setSubmitState({
+        tone: "error",
+        message: "Direct delivery failed. Your email app is opening now so you can still send the message.",
+      });
       window.location.href = `mailto:${socialLinks.email}?subject=${subject}&body=${body}`;
       toast.error("Direct send failed, so your email app is opening as a fallback.");
     } finally {
@@ -70,7 +93,7 @@ const Contact = () => {
           Have a startup idea, a business model or a corporate entity you want turned into a mobile app, a website or enhanced security for you? Have a project in mind or want to collaborate? Let's talk.
         </p>
         <p className="font-bell text-sm text-primary/80 mb-10">
-          Messages are sent straight to my inbox through a professional contact flow. If direct delivery is unavailable, your email app opens as a fallback.
+          Messages go straight to my inbox through a dependable contact flow, with email-app fallback only if delivery is temporarily unavailable.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
@@ -117,6 +140,21 @@ const Contact = () => {
             <Send size={18} />
             {isSubmitting ? "Sending..." : "Send Message"}
           </motion.button>
+          <p
+            className={[
+              "min-h-6 text-sm font-body transition-colors",
+              submitState?.tone === "success" && "text-emerald-400",
+              submitState?.tone === "error" && "text-rose-400",
+              submitState?.tone === "info" && "text-primary/85",
+              !submitState && "text-transparent",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            role="status"
+            aria-live="polite"
+          >
+            {submitState?.message ?? "Status messages appear here after you send the form."}
+          </p>
         </form>
       </div>
     </AnimatedSection>
