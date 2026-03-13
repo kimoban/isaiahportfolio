@@ -20,7 +20,7 @@ const Footer = () => (
               Built for Bold Ideas
             </p>
             <p className="text-base sm:text-lg font-medium text-foreground font-body">
-              © {new Date().getFullYear()} Isaiah N-yilyal.
+              © {new Date().getFullYear()} Isaiah N-yilyal
             </p>
             <p className="text-sm text-muted-foreground font-body mt-1">
               All rights reserved.
