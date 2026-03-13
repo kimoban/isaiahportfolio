@@ -22,7 +22,7 @@ const Footer = () => (
             <p className="text-base sm:text-lg font-medium text-foreground font-body">
               © {new Date().getFullYear()} Isaiah N-yilyal
             </p>
-            <p className="text-sm text-muted-foreground font-body mt-1">
+            <p className="text-sm text-muted-foreground italic font-body mt-1">
               All rights reserved.
             </p>
           </div>
