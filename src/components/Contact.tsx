@@ -48,7 +48,6 @@ const Contact = () => {
     }
 
     formData.set("subject", `Portfolio inquiry from ${name}`);
-    formData.set("_replyto", email);
 
     try {
       setIsSubmitting(true);
