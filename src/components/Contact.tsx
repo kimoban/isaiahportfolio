@@ -139,8 +139,8 @@ const Contact = () => {
             <Send size={18} />
             {isSubmitting ? "Sending..." : "Send Message"}
           </motion.button>
-          <div className="flex flex-col items-start gap-3 pt-1">
-            <p className="text-sm font-medium text-muted-foreground font-body pl-1">Or</p>
+          <div className="flex flex-col items-center gap-3 pt-1 text-center">
+            <p className="text-sm font-semibold text-primary/85 font-body tracking-[0.18em] uppercase">Or</p>
             <motion.a
               href={socialLinks.calendly}
               target="_blank"
