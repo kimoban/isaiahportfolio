@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Facebook, Github, Linkedin, Mail, Youtube } from "lucide-react";
 import { socialLinks } from "@/data/portfolio";
 import XIcon from "./XIcon";
 
@@ -26,11 +26,13 @@ const Footer = () => (
               All rights reserved.
             </p>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:justify-end">
         {[
           { icon: Github, href: socialLinks.github, label: "GitHub" },
           { icon: Linkedin, href: socialLinks.linkedin, label: "LinkedIn" },
           { icon: Mail, href: `mailto:${socialLinks.email}`, label: "Email" },
+          { icon: Facebook, href: socialLinks.facebook, label: "Facebook" },
+          { icon: Youtube, href: socialLinks.youtube, label: "YouTube" },
           { icon: XIcon, href: socialLinks.x, label: "X" },
           { icon: MediumIcon, href: socialLinks.medium, label: "Medium" },
         ].map(({ icon: Icon, href, label }) => (
@@ -39,7 +41,7 @@ const Footer = () => (
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-border/80 bg-background/65 text-foreground shadow-[0_12px_30px_-18px_hsl(var(--foreground)/0.2)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-[linear-gradient(135deg,hsl(var(--primary)/0.14),hsl(var(--hero-gradient-end)/0.14),hsl(var(--accent)/0.12))] hover:text-primary"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-[1.15rem] border border-border/80 bg-background/65 text-foreground shadow-[0_12px_30px_-18px_hsl(var(--foreground)/0.2)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-[linear-gradient(135deg,hsl(var(--primary)/0.14),hsl(var(--hero-gradient-end)/0.14),hsl(var(--accent)/0.12))] hover:text-primary"
             aria-label={label}
           >
             <Icon size={18} />

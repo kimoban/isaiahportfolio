@@ -153,4 +153,6 @@ export const socialLinks = {
   email: "isaiahkimoban87@gmail.com",
   x: "https://x.com/kimobaan",
   medium: "https://medium.com/@kimoban",
+  facebook: "https://facebook.com",
+  youtube: "https://youtube.com",
 };
