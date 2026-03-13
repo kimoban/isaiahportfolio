@@ -27,6 +27,17 @@ npm run lint
 npm test
 ```
 
+## Contact Form Setup
+
+This project is wired for Formspree so the contact form can submit directly to your inbox without requiring a backend.
+
+1. Create a form at Formspree.
+2. Copy your endpoint, which looks like `https://formspree.io/f/your-form-id`.
+3. Create a local `.env` file using `.env.example`.
+4. Set `VITE_FORMSPREE_ENDPOINT` to your Formspree endpoint.
+
+If the environment variable is not set or direct delivery fails, the site falls back to opening the visitor's default email app.
+
 ## Deploying To Vercel
 
 1. Import the repository into Vercel.
@@ -41,4 +52,4 @@ Install Command: npm install
 
 1. Deploy.
 
-No environment variables are required for the current site.
+Set `VITE_FORMSPREE_ENDPOINT` in Vercel if you want direct contact form delivery in production.

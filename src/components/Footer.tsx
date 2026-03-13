@@ -1,4 +1,4 @@
-import { Facebook, Github, Linkedin, Mail, Youtube } from "lucide-react";
+import { Facebook, Github, Linkedin, Youtube } from "lucide-react";
 import { socialLinks } from "@/data/portfolio";
 import XIcon from "./XIcon";
 
@@ -30,7 +30,6 @@ const Footer = () => (
         {[
           { icon: Github, href: socialLinks.github, label: "GitHub" },
           { icon: Linkedin, href: socialLinks.linkedin, label: "LinkedIn" },
-          { icon: Mail, href: `mailto:${socialLinks.email}`, label: "Email" },
           { icon: Facebook, href: socialLinks.facebook, label: "Facebook" },
           { icon: Youtube, href: socialLinks.youtube, label: "YouTube" },
           { icon: XIcon, href: socialLinks.x, label: "X" },

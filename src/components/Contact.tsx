@@ -1,4 +1,4 @@
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
 import { Send } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
@@ -6,7 +6,9 @@ import { socialLinks } from "@/data/portfolio";
 import { toast } from "sonner";
 
 const Contact = () => {
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const form = event.currentTarget;
@@ -14,13 +16,48 @@ const Contact = () => {
     const name = formData.get("name")?.toString().trim() ?? "";
     const email = formData.get("email")?.toString().trim() ?? "";
     const message = formData.get("message")?.toString().trim() ?? "";
+    const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT?.trim();
 
     const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
 
-    window.location.href = `mailto:${socialLinks.email}?subject=${subject}&body=${body}`;
-    toast.success("Opening your email app.");
-    form.reset();
+    if (!name || !email || !message) {
+      toast.error("Please complete all fields before sending.");
+      return;
+    }
+
+    if (!formspreeEndpoint) {
+      window.location.href = `mailto:${socialLinks.email}?subject=${subject}&body=${body}`;
+      toast.success("Opening your email app.");
+      return;
+    }
+
+    formData.set("subject", `Portfolio inquiry from ${name}`);
+    formData.set("_replyto", email);
+
+    try {
+      setIsSubmitting(true);
+
+      const response = await fetch(formspreeEndpoint, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Form submission failed.");
+      }
+
+      toast.success("Message sent successfully. I will receive it in my inbox.");
+      form.reset();
+    } catch {
+      window.location.href = `mailto:${socialLinks.email}?subject=${subject}&body=${body}`;
+      toast.error("Direct send failed, so your email app is opening as a fallback.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -33,7 +70,7 @@ const Contact = () => {
           Have a startup idea, a business model or a corporate entity you want turned into a mobile app, a website or enhanced security for you? Have a project in mind or want to collaborate? Let's talk.
         </p>
         <p className="font-bell text-sm text-primary/80 mb-10">
-          This form opens your default email app with your message prefilled.
+          Messages are sent straight to my inbox through a professional contact flow. If direct delivery is unavailable, your email app opens as a fallback.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
@@ -43,6 +80,7 @@ const Contact = () => {
               type="text"
               required
               placeholder="Your name"
+              autoComplete="name"
               className="w-full px-4 py-3 rounded-lg bg-secondary text-foreground placeholder:text-muted-foreground border border-border focus:outline-none focus:ring-2 focus:ring-ring font-body"
             />
             <input
@@ -50,9 +88,18 @@ const Contact = () => {
               type="email"
               required
               placeholder="Your email"
+              autoComplete="email"
               className="w-full px-4 py-3 rounded-lg bg-secondary text-foreground placeholder:text-muted-foreground border border-border focus:outline-none focus:ring-2 focus:ring-ring font-body"
             />
           </div>
+          <input
+            name="_gotcha"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            className="hidden"
+            aria-hidden="true"
+          />
           <textarea
             name="message"
             required
@@ -64,10 +111,11 @@ const Contact = () => {
             type="submit"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium transition-opacity hover:opacity-90"
+            disabled={isSubmitting}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
           >
             <Send size={18} />
-            Compose Your Email
+            {isSubmitting ? "Sending..." : "Send Message"}
           </motion.button>
         </form>
       </div>
